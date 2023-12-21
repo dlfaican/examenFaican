@@ -9,7 +9,6 @@ import ec.edu.espe.examenfaican.examen.dao.AlumnoRepository;
 import ec.edu.espe.examenfaican.examen.dao.ColegioRepository;
 import ec.edu.espe.examenfaican.examen.domain.Alumno;
 import ec.edu.espe.examenfaican.examen.domain.Colegio;
-import ec.edu.espe.examenfaican.examen.service.exception.ColegioNotFoundException;
 import ec.edu.espe.examenfaican.examen.service.exception.CreateException;
 
 @Service
@@ -27,7 +26,7 @@ public class AlumnoService {
         try {
             Optional<Colegio> colegioOptional = colegioRepository.findById(alumno.getCodColegio());
             if (colegioOptional.isEmpty()) {
-                throw new ColegioNotFoundException("Error, el colegio no se encuentra registrado");
+                throw new RuntimeException("Error, el colegio no se encuentra registrado");
             }
 
             LocalDate fechaNacimiento = alumno.getFechaNacimiento().toLocalDate();
