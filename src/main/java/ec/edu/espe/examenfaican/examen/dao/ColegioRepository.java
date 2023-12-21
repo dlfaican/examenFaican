@@ -7,5 +7,5 @@ import org.springframework.data.repository.CrudRepository;
 import ec.edu.espe.examenfaican.examen.domain.Colegio;
 
 public interface ColegioRepository extends CrudRepository<Colegio, Integer> {
-    List<Colegio> findByNombre(String nombre);
+    List<Colegio> findByNombreContainingIgnoreCase(String patronNombre);
 }

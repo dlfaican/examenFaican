@@ -1,13 +1,12 @@
 package ec.edu.espe.examenfaican.examen.service;
 
 import java.util.List;
-import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ec.edu.espe.examenfaican.examen.dao.ColegioRepository;
 import ec.edu.espe.examenfaican.examen.domain.Colegio;
+import ec.edu.espe.examenfaican.examen.service.exception.CreateException;
 
 @Service
 public class ColegioService {
@@ -26,7 +25,13 @@ public class ColegioService {
         }
     }
     
-    
+    public List<Colegio> obtenerColegiosPorPatronNombre(String patronNombre) {
+        try {
+            return this.colegioRepository.findByNombreContainingIgnoreCase(patronNombre);
+        } catch (Exception e) {
+            throw new RuntimeException("Error al obtener colegios por nombre: " + patronNombre, e);
+        }
+    }
     
 
 
